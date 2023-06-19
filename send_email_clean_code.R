@@ -1,5 +1,5 @@
 library(blastula)
-setwd("C:/Users/John/Desktop/triggerise")
+#setwd("C:/Users/John/Desktop/triggerise")
 
 # cred file
 #create_smtp_creds_file(file = "murume",
