@@ -1,0 +1,41 @@
+---
+title: "Triggerise Facility Monthly Report"      
+format: html
+editor: visual
+execute:
+  cache: false
+params:
+  Facility: ["Mbagathi", "Kenyatta"]
+---
+
+## Monthly Report for `r params$Facility`
+
+Find attached your performance report for the month ending June 30th 2023.
+
+## Monthly Performance
+
+See attached your performance on your number of clients for each service type.
+
+```{r sales_plot, echo=FALSE,message=FALSE,warnings=FALSE,fig.cap=paste('Number of Clients Plot for',params$Facility), fig.height=4, fig.width=6}
+
+library(tidyverse)
+library(ggplot2)
+#load data
+facility_data=read.csv("sample facility data.csv", stringsAsFactors = T)
+# Generate ggplot2 sales plot based on agent-specific data
+
+facility_filter=facility_data |>
+  filter(Facility == params$Facility)
+
+plot_filename <- glue::glue("{params$Facility}_sales_plot.png")
+ggsave(plot_filename, ggplot(facility_filter, aes(x = Service_Type, y = Clients)) +
+         geom_bar(stat = "identity", fill = "#631ae6") +
+         labs(x = 'Service Type', y = 'Number of Clients'))
+
+# Include the figure in the report
+knitr::include_graphics(plot_filename)
+```
+
+## Conclusion
+
+We need to increase the average number of clients by service type.
