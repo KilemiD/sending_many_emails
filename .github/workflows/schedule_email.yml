@@ -1,1 +1,28 @@
-
+name: Send Multiple Emails using Quarto and Blastula
+on: push
+jobs:
+  render:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v1
+      - name: Set up pandoc
+        uses: r-lib/actions/setup-pandoc@v2
+      - name: Install dependencies
+        run: |
+          install.packages("blastula", type = "win.binary")
+          install.packages("ggplot2", type= "win.binary")
+        shell: Rscript {0}
+      - name: Script
+        run: Rscript send email clean code.R
+      - name: Commit file
+        run: |
+          git config --local user.name "KilemiD"
+          git config --local user.email "86884655+KilemiD@users.noreply.github.com"
+          git add output/*
+          git commit -am "commit on $(date)"
+          git push origin main
+        env:
+          REPO_KEY: ${{secrets.GITHUB_TOKEN}}
+          username: github-actions
