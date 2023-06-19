@@ -1,4 +1,5 @@
 library(blastula)
+library(purrr)
 #setwd("C:/Users/John/Desktop/triggerise")
 
 # cred file
