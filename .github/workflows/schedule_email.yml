@@ -15,7 +15,7 @@ jobs:
           install.packages("ggplot2", type= "win.binary")
         shell: Rscript {0}
       - name: Script
-        run: Rscript send email clean code.R
+        run: Rscript send_email_clean_code.R
       - name: Commit file
         run: |
           git config --local user.name "KilemiD"
