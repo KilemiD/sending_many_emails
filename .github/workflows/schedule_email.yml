@@ -14,6 +14,7 @@ jobs:
           install.packages("blastula", type = "win.binary")
           install.packages("ggplot2", type= "win.binary")
           install.packages("purrr", type="win.binary")
+          install.packages("quarto",type="win.binary")
         shell: Rscript {0}
       - name: Script
         run: Rscript send_email_clean_code.R
